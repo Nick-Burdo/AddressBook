@@ -29,4 +29,20 @@ public class CollectionAddressBook implements AddressBook {
     public ArrayList<Person> getPersonList() {
         return personList;
     }
+
+    public void print() {
+        int number = 1;
+        for (Person person: personList) {
+            System.out.println(number++ + ") name = " +person.getName() + "; phone = " + person.getPhone());
+        }
+    }
+
+    public void fillTestData() {
+        personList.add(new Person("Ivan","1234567"));
+        personList.add(new Person("Semen","9990000"));
+        personList.add(new Person("Nick","5556677"));
+        personList.add(new Person("Peter","2222222"));
+        personList.add(new Person("Andrey","7654321"));
+    }
+
 }

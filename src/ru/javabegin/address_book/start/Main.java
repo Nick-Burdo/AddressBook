@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import ru.javabegin.address_book.interfaces.impl.CollectionAddressBook;
 import ru.javabegin.address_book.objects.Person;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
 
     @Override
@@ -30,19 +32,9 @@ public class Main extends Application {
     private void testData() {
         CollectionAddressBook addressBook = new CollectionAddressBook();
 
-        Person person1 = new Person();
-        person1.setName("test1");
-        person1.setPhone("123456789");
+        addressBook.fillTestData();
 
-        Person person2 = new Person();
-        person2.setName("test2");
-        person2.setPhone("777777777777");
-
-        addressBook.add(person1);
-        addressBook.add(person2);
-
-        person2.setPhone("111111111111");
-
-        addressBook.delete(person2);
+        addressBook.print();
     }
+
 }
