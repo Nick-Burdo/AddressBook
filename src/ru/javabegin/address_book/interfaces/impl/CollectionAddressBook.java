@@ -1,5 +1,7 @@
 package ru.javabegin.address_book.interfaces.impl;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ru.javabegin.address_book.interfaces.AddressBook;
 import ru.javabegin.address_book.objects.Person;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
  * Created by tigra on 09.04.17.
  */
 public class CollectionAddressBook implements AddressBook {
-    private ArrayList<Person> personList = new ArrayList<>();
+    private ObservableList<Person> personList = FXCollections.observableArrayList();
 
     @Override
     public void add(Person person) {
@@ -26,7 +28,7 @@ public class CollectionAddressBook implements AddressBook {
         personList.remove(person);
     }
 
-    public ArrayList<Person> getPersonList() {
+    public ObservableList<Person> getPersonList() {
         return personList;
     }
 
