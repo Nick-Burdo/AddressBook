@@ -14,13 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import ru.javabegin.address_book.interfaces.impl.CollectionAddressBook;
 import ru.javabegin.address_book.objects.Person;
 
-import java.awt.*;
 import java.io.IOException;
 
-public class mainAppController {
+public class MainAppController {
     @FXML
     private Button btnAdd;
     @FXML
@@ -40,6 +40,11 @@ public class mainAppController {
     @FXML
     private Label labelCount;
 
+    private Parent fxmlEdit;
+    private FXMLLoader fxmlLoader = new FXMLLoader();
+    private EditDialogController editDialogController;
+    private Stage editDialogStage;
+
     private CollectionAddressBook addressBook = new CollectionAddressBook();
 
     @FXML
@@ -58,38 +63,48 @@ public class mainAppController {
 
         tableAddressBook.setItems(addressBook.getPersonList());
 
-    }
-
-    public void showEditDialog(ActionEvent actionEvent) {
         try {
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("editDialog.fxml"));
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            stage.show();
+            fxmlLoader.setLocation(getClass().getResource("editDialog.fxml"));
+            fxmlEdit = fxmlLoader.load();
+            editDialogController = fxmlLoader.getController();
         } catch (IOException e) {
-
-            System.out.println("Exception in mainAppController");
             e.printStackTrace();
         }
     }
 
-    public void showDialog(ActionEvent actionEvent) {
+    private void showEditDialog(Window parentWindow) {
+        if (editDialogStage == null) {
+            editDialogStage = new Stage();
+            editDialogStage.setTitle("Edit Record");
+            editDialogStage.setResizable(false);
+            editDialogStage.setScene(new Scene(fxmlEdit));
+            editDialogStage.initModality(Modality.WINDOW_MODAL);
+            editDialogStage.initOwner(parentWindow);
+        }
+
+        editDialogStage.show();
+    }
+
+    public void actionButtonPressed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
 
         if (!(source instanceof Button)) return;
 
         Button clickedBtn = (Button) source;
         Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
+        Window parentWindow = ((Node) actionEvent.getSource()).getScene().getWindow();
+
+        if (selectedPerson == null) {
+            selectedPerson = new Person();
+        }
+        editDialogController.setPerson(selectedPerson);
 
         switch (clickedBtn.getId()) {
             case "btnAdd":
-                System.out.println("add " + selectedPerson);
+                showEditDialog(parentWindow);
                 break;
             case "btnEdit":
-                System.out.println("edit " + selectedPerson);
+                showEditDialog(parentWindow);
                 break;
             case "btnDelete":
                 System.out.println("delete " + selectedPerson);

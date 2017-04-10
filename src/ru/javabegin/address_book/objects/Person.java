@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
  * Created by tigra on 09.04.17.
  */
 public class Person {
-    private SimpleStringProperty name;
-    private SimpleStringProperty phone;
+    private SimpleStringProperty name = new SimpleStringProperty("");
+    private SimpleStringProperty phone = new SimpleStringProperty("");
 
     public String getName() {
         return name.get();
