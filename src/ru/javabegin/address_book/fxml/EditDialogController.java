@@ -46,4 +46,7 @@ public class EditDialogController {
         textName.setText(person.getName());
         textPhone.setText(person.getPhone());
     }
+    public Person getPerson() {
+        return person;
+    }
 }

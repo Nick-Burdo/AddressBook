@@ -2,6 +2,7 @@ package ru.javabegin.address_book.fxml;
 
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -44,6 +46,15 @@ public class MainAppController {
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private EditDialogController editDialogController;
     private Stage editDialogStage;
+    private Stage mainAppStage;
+
+    public Stage getMainAppStage() {
+        return mainAppStage;
+    }
+
+    public void setMainAppStage(Stage mainAppStage) {
+        this.mainAppStage = mainAppStage;
+    }
 
     private CollectionAddressBook addressBook = new CollectionAddressBook();
 
@@ -52,37 +63,13 @@ public class MainAppController {
         columnName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
 
-        addressBook.getPersonList().addListener(new ListChangeListener<Person>() {
-            @Override
-            public void onChanged(Change<? extends Person> c) {
-                updateLabelCount();
-            }
-        });
+        initListeners();
 
         addressBook.fillTestData();
 
         tableAddressBook.setItems(addressBook.getPersonList());
 
-        try {
-            fxmlLoader.setLocation(getClass().getResource("editDialog.fxml"));
-            fxmlEdit = fxmlLoader.load();
-            editDialogController = fxmlLoader.getController();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showEditDialog(Window parentWindow) {
-        if (editDialogStage == null) {
-            editDialogStage = new Stage();
-            editDialogStage.setTitle("Edit Record");
-            editDialogStage.setResizable(false);
-            editDialogStage.setScene(new Scene(fxmlEdit));
-            editDialogStage.initModality(Modality.WINDOW_MODAL);
-            editDialogStage.initOwner(parentWindow);
-        }
-
-        editDialogStage.show();
+        initLoader();
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
@@ -97,22 +84,68 @@ public class MainAppController {
         if (selectedPerson == null) {
             selectedPerson = new Person();
         }
-        editDialogController.setPerson(selectedPerson);
+
 
         switch (clickedBtn.getId()) {
             case "btnAdd":
-                showEditDialog(parentWindow);
+                editDialogController.setPerson(new Person());
+                showEditDialog();
+                addressBook.add(editDialogController.getPerson());
                 break;
             case "btnEdit":
-                showEditDialog(parentWindow);
+                editDialogController.setPerson(selectedPerson);
+                showEditDialog();
                 break;
             case "btnDelete":
-                System.out.println("delete " + selectedPerson);
+                addressBook.delete(selectedPerson);
                 break;
+        }
+    }
+
+    private void initListeners() {
+        addressBook.getPersonList().addListener(new ListChangeListener<Person>() {
+            @Override
+            public void onChanged(Change<? extends Person> c) {
+                updateLabelCount();
+            }
+        });
+
+        tableAddressBook.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 2) {
+                    Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
+                    editDialogController.setPerson(selectedPerson);
+                    showEditDialog();
+                }
+            }
+        });
+    }
+
+    private void initLoader() {
+        try {
+            fxmlLoader.setLocation(getClass().getResource("editDialog.fxml"));
+            fxmlEdit = fxmlLoader.load();
+            editDialogController = fxmlLoader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private void updateLabelCount() {
         labelCount.setText(addressBook.getPersonList().size() + "");
+    }
+
+    private void showEditDialog() {
+        if (editDialogStage == null) {
+            editDialogStage = new Stage();
+            editDialogStage.setTitle("Edit Record");
+            editDialogStage.setResizable(false);
+            editDialogStage.setScene(new Scene(fxmlEdit));
+            editDialogStage.initModality(Modality.WINDOW_MODAL);
+            editDialogStage.initOwner(mainAppStage);
+        }
+
+        editDialogStage.showAndWait();
     }
 }
