@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.javabegin.address_book.controllers.editDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.javabegin.address_book.fxml.editDialogController">
    <children>
       <GridPane AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
@@ -20,12 +20,12 @@
          <children>
             <Label text="Name" />
             <Label text="Phone" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textName" GridPane.columnIndex="1" />
+            <TextField fx:id="textPhone" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="80.0" text="OK" />
-                  <Button mnemonicParsing="false" prefWidth="80.0" text="Cancel" />
+                  <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" prefWidth="80.0" text="OK" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionClose" prefWidth="80.0" text="Cancel" />
                </children>
                <padding>
                   <Insets left="20.0" top="22.0" />

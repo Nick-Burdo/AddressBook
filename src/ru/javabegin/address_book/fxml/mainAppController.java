@@ -8,12 +8,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.javabegin.address_book.interfaces.impl.CollectionAddressBook;
 import ru.javabegin.address_book.objects.Person;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class mainAppController {
@@ -69,6 +73,27 @@ public class mainAppController {
 
             System.out.println("Exception in mainAppController");
             e.printStackTrace();
+        }
+    }
+
+    public void showDialog(ActionEvent actionEvent) {
+        Object source = actionEvent.getSource();
+
+        if (!(source instanceof Button)) return;
+
+        Button clickedBtn = (Button) source;
+        Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
+
+        switch (clickedBtn.getId()) {
+            case "btnAdd":
+                System.out.println("add " + selectedPerson);
+                break;
+            case "btnEdit":
+                System.out.println("edit " + selectedPerson);
+                break;
+            case "btnDelete":
+                System.out.println("delete " + selectedPerson);
+                break;
         }
     }
 
