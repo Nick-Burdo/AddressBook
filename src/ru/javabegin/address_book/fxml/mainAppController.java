@@ -1,5 +1,6 @@
 package ru.javabegin.address_book.fxml;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,11 +43,17 @@ public class mainAppController {
         columnName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
 
+        addressBook.getPersonList().addListener(new ListChangeListener<Person>() {
+            @Override
+            public void onChanged(Change<? extends Person> c) {
+                updateLabelCount();
+            }
+        });
+
         addressBook.fillTestData();
 
         tableAddressBook.setItems(addressBook.getPersonList());
 
-        updateLabelCount();
     }
 
     public void showEditDialog(ActionEvent actionEvent) {

@@ -20,21 +20,10 @@ public class Main extends Application {
         primaryStage.setMinHeight(425);
         primaryStage.setScene(new Scene(root, 340, 425));
         primaryStage.show();
-
-        testData();
     }
 
 
     public static void main(String[] args) {
         launch(args);
     }
-
-    private void testData() {
-        CollectionAddressBook addressBook = new CollectionAddressBook();
-
-        addressBook.fillTestData();
-
-        addressBook.print();
-    }
-
 }
