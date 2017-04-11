@@ -18,14 +18,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Name" />
-            <Label text="Phone" GridPane.rowIndex="1" />
+            <Label text="%key.label.name" />
+            <Label text="%key.label.phone" GridPane.rowIndex="1" />
             <TextField fx:id="textName" GridPane.columnIndex="1" />
             <TextField fx:id="textPhone" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" onAction="#actionSave" prefWidth="80.0" text="OK" />
-                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionClose" prefWidth="80.0" text="Cancel" />
+                  <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" onAction="#actionSave" prefWidth="80.0" text="%key.btn.ok" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionClose" prefWidth="80.0" text="%key.btn.cancel" />
                </children>
                <padding>
                   <Insets left="20.0" top="22.0" />
