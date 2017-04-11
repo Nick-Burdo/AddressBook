@@ -25,7 +25,7 @@ public class Main extends Application {
         MainAppController mainAppController = fxmlLoader.getController();
         mainAppController.setMainAppStage(primaryStage);
 
-        primaryStage.setTitle(fxmlLoader.getResources().getString("address_book"));
+        primaryStage.setTitle(fxmlLoader.getResources().getString("key.title.address_book"));
         primaryStage.setMinWidth(340);
         primaryStage.setMinHeight(425);
         primaryStage.setScene(new Scene(fxmlMain, 340, 425));

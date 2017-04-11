@@ -15,17 +15,17 @@
          <children>
             <HBox>
                <children>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%add">
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%key.btn.add">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%edit">
+                  <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%key.btn.edit">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%delete">
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionButtonPressed" prefHeight="25.0" prefWidth="90.0" text="%key.btn.delete">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
@@ -35,7 +35,7 @@
             <AnchorPane>
                <children>
                   <TextField fx:id="txtSearch" prefHeight="25.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
-                  <Button fx:id="btnSearch" layoutX="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="%search" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="btnSearch" layoutX="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="%key.btn.search" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -45,8 +45,8 @@
                <children>
                   <TableView fx:id="tableAddressBook" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="columnName" prefWidth="150.0" text="%name" />
-                      <TableColumn fx:id="columnPhone" prefWidth="150.0" text="%phone" />
+                      <TableColumn fx:id="columnName" prefWidth="150.0" text="%key.label.name" />
+                      <TableColumn fx:id="columnPhone" prefWidth="150.0" text="%key.label.phone" />
                     </columns>
                      <FlowPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />
@@ -57,7 +57,7 @@
                   </TableView>
                   <HBox layoutX="20.0" layoutY="415.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <children>
-                        <Label text="%records_count" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+                        <Label text="%key.label.record_count" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
                         <Label text=":" />
                         <Label fx:id="labelCount" layoutX="139.0" layoutY="423.0" text="0" AnchorPane.bottomAnchor="20.0">
                            <padding>

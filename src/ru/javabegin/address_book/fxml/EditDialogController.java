@@ -2,18 +2,21 @@ package ru.javabegin.address_book.fxml;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.javabegin.address_book.objects.Person;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by tigra on 07.04.17.
  */
-public class EditDialogController {
+public class EditDialogController implements Initializable {
     @FXML
     private Button btnOK;
     @FXML
@@ -25,8 +28,10 @@ public class EditDialogController {
 
     private Person person;
 
-    @FXML
-    void initialize() {
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     public void actionClose(ActionEvent actionEvent) {
