@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.javabegin.address_book.objects.Person;
+import ru.javabegin.address_book.utils.DialogManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,11 +28,12 @@ public class EditDialogController implements Initializable {
     private TextField textPhone;
 
     private Person person;
+    private ResourceBundle resourceBundle;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.resourceBundle = resources;
     }
 
     public void actionClose(ActionEvent actionEvent) {
@@ -41,6 +43,9 @@ public class EditDialogController implements Initializable {
     }
 
     public void actionSave(ActionEvent actionEvent) {
+        if (!addPersonValidate()) {
+            return;
+        }
         person.setName(textName.getText());
         person.setPhone(textPhone.getText());
         actionClose(actionEvent);
@@ -53,5 +58,13 @@ public class EditDialogController implements Initializable {
     }
     public Person getPerson() {
         return person;
+    }
+
+    private boolean addPersonValidate() {
+        if (textName.getText().trim().length() == 0 || textPhone.getText().trim().length() == 0) {
+            DialogManager.showErrorDialog(resourceBundle.getString("key.dialog.title.error"), resourceBundle.getString("key.dialog.fill_fields"));
+            return false;
+        }
+        return true;
     }
 }

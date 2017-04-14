@@ -1,6 +1,8 @@
 package ru.javabegin.address_book.fxml;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.stage.Window;
 import ru.javabegin.address_book.interfaces.impl.CollectionAddressBook;
 import ru.javabegin.address_book.objects.Person;
 import ru.javabegin.address_book.start.Main;
+import ru.javabegin.address_book.utils.DialogManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +57,8 @@ public class MainAppController implements Initializable {
     private ResourceBundle resourceBundle;
     private CollectionAddressBook addressBook = new CollectionAddressBook();
 
+    private ObservableList<Person> backupList;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
@@ -63,6 +68,8 @@ public class MainAppController implements Initializable {
         initListeners();
 
         addressBook.fillTestData();
+        backupList = FXCollections.observableArrayList();
+        backupList.addAll(addressBook.getPersonList());
 
         tableAddressBook.setItems(addressBook.getPersonList());
 
@@ -82,11 +89,6 @@ public class MainAppController implements Initializable {
         Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
         Window parentWindow = ((Node) actionEvent.getSource()).getScene().getWindow();
 
-        if (selectedPerson == null) {
-            selectedPerson = new Person();
-        }
-
-
         switch (clickedBtn.getId()) {
             case "btnAdd":
                 editDialogController.setPerson(new Person());
@@ -94,12 +96,29 @@ public class MainAppController implements Initializable {
                 addressBook.add(editDialogController.getPerson());
                 break;
             case "btnEdit":
+                if (!isSelectedPerson(selectedPerson)) {
+                    return;
+                }
                 editDialogController.setPerson(selectedPerson);
                 showEditDialog(resourceBundle.getString("key.title.edit"));
                 break;
             case "btnDelete":
+                if (!isSelectedPerson(selectedPerson)) {
+                    return;
+                }
                 addressBook.delete(selectedPerson);
                 break;
+        }
+    }
+
+    public void actionSearch(ActionEvent actionEvent) {
+        addressBook.getPersonList().clear();
+
+        for (Person person: backupList) {
+            if (person.getName().toLowerCase().contains(txtSearch.getText().toLowerCase()) ||
+                    person.getPhone().toLowerCase().contains(txtSearch.getText().toLowerCase())) {
+                addressBook.getPersonList().add(person);
+            }
         }
     }
 
@@ -133,6 +152,14 @@ public class MainAppController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isSelectedPerson(Person selectedPerson) {
+        if (selectedPerson == null) {
+            DialogManager.showErrorDialog(resourceBundle.getString("key.dialog.title.error"), resourceBundle.getString("key.dialog.select_person"));
+            return false;
+        }
+        return true;
     }
 
     private void updateLabelCount() {
