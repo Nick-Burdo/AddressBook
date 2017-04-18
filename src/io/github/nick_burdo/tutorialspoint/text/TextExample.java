@@ -6,7 +6,10 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,9 +35,13 @@ public class TextExample extends Application {
 //        ObservableList list = root.getChildren();
 //        list.add(new AnchorPane());
         Text text = new Text("Welcome to tutorialspoint");
-        text.setFont(new Font(32));
+//        text.setFont(new Font(32));
         text.setX(20);
         text.setY(50);
+        text.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 32));
+        text.setFill(Color.WHEAT);
+        text.setStroke(Color.RED);
+        text.setStrokeWidth(1);
 
         Group root = new Group(text);
 
