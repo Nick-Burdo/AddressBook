@@ -1,9 +1,13 @@
-package ru.specialiast.event;
+package ru.specialist.event;
 
 /**
  * Created by tigra on 22.04.17.
  */
 public class Programm {
+    public static void fire(Object sender) {
+        System.out.println("Super Fire!!!");
+    }
+
     public static void main(String[] args) {
         Switcher switcher = new Switcher();
         Lamp lamp = new Lamp();
@@ -11,7 +15,7 @@ public class Programm {
         Radio radio = new Radio();
         switcher.addElectricityListener(radio);
 
-        switcher.addElectricityListener(() -> System.out.println("FIRE"));
+        switcher.addElectricityListener(Programm::fire);
 
         switcher.switchOn();
     }

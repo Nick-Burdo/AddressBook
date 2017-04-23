@@ -1,4 +1,4 @@
-package ru.specialiast.event;
+package ru.specialist.event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Switcher {
 
         System.out.println("Switcher is ON");
         for (ElectricityConsumer consumer : listeners) {
-            consumer.electricityOn();
+            consumer.electricityOn(this);
         }
     }
 }

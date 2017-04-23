@@ -1,4 +1,4 @@
-package ru.specialiast.event;
+package ru.specialist.event;
 
 /**
  * Created by tigra on 22.04.17.
@@ -9,7 +9,7 @@ public class Radio implements ElectricityConsumer {
     }
 
     @Override
-    public void electricityOn() {
+    public void electricityOn(Object sender) {
         radioOn();
     }
 }
